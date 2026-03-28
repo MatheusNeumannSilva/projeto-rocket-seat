@@ -1,0 +1,180 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  /* so o (*) é o seletor para TODOS os elementos, com isso tira as config por padrao q o navegador coloca, nesse caso tirou a margin e o padding padrao do navegador, box sizing: border-box é a medida atraves da borda usado para manter o padding, ele se vira para colocar o preenchimento interno mas respeitando a largura da caixa*/
+}
+
+:root {
+  --text-color: white;
+  --bg-url: url(./assets/bg-mobile.jpg);
+  --stroke-color: rgba(255, 255, 255, 0.5);
+  --surface-color: rgba(255, 255, 255, 0.05);
+  --surface-color-hover: rgba(0, 0, 0, 0.02);
+  --highlight-color: rgba(255, 255, 255, 0.2);
+  --switch-bg-url: url(./assets/moon-stars.svg);
+}
+/* --tex-color é uma variavel no (root= raiz todo o hmtl) text color uma variavel usado para receber todo o texto q esta em branco pois foi a cor q eu selecionei, definindo q todo conteudo em td lugar da minha pagina, tudo q eu usar essa variavel ira usar branco no lugar, ou seja meu body esta cm a cor #fffff mas eu posso aplicar var(--text-color); q ele ira mudar Todas as coisas para branco nao so as escrita mas tbm os icones*/
+
+.light {
+  --text-color: black;
+  --bg-url: url(./assets/bg-mobile-light.jpg);
+  --stroke-color: rgba(0, 0, 0, 0.5);
+  --surface-color: rgba(0, 0, 0, 0.05);
+  --surface-color-hover: rgba(0, 0, 0, 0.02);
+  --highlight-color: rgba(0, 0, 0, 0.1);
+  --switch-bg-url: url(./assets/sun.svg);
+}
+
+body {
+  /* 
+    background-image: url(./assets/bg-mobile.jpg);
+    background-repeat: no-repeat;
+    background-position:top center;
+    background-size: cover;
+    */
+
+  /*background: image repeat position/size */
+  background: var(--bg-url) no-repeat top center/cover;
+}
+
+body * {
+  font-family: "Inter", sans-serif;
+  color: var(--text-color);
+  /* asterisco= seletor universal,aqui nesse code o "seletor universal" se aplica ao body*/
+}
+
+#container {
+  width: 100%;
+  max-width: 588px;
+  margin: 56px auto 0px;
+  text-align: center;
+  padding: 0px 24px;
+
+  /*width= largura
+  height = altura no css geralmente nao é preciso definir altura
+  ordem do margin: top,right,bottom,left   a ordem do padding tbm é a mesma coisa, sentido horario*/
+}
+/*profile*/
+#profile {
+  text-align: center;
+  padding: 24px;
+}
+
+#profile img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: auto;
+  /* display block da toda a largura possivel de tela c n tiver uma largura fixa, elementos inline nao é possivel aplicar margin-auto, a nao ser que vc transforme em block, ou usasse para alinhas objetos in-line o text-align: center;*/
+}
+
+#profile p {
+  font-weight: 500;
+  line-height: 24px;
+  margin: 8px;
+}
+
+/*switch*/
+
+#switch {
+  position: relative;
+  width: 64px;
+  margin: 4px auto;
+}
+
+#switch button {
+  width: 32px;
+  height: 32px;
+  background: white var(--switch-bg-url) no-repeat center;
+  border: 0;
+  border-radius: 50%;
+  display: flex;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  z-index: 1;
+  transform: translateY(-50%);
+}
+/*position:absolute= posição absoluta, usando ele, ele imediatamente faz uma sobreposição, z-index: 1= muda o andar do elemento a camada, obs: position absolute libera o z-index, position relative, vai relativizar o absolute, o absoluto vai ser relativo ao elemento todo SWITCH, transform: translateY= permite mover o objeto para cima e para baixo, ja o X para os lados*/
+
+.light #switch button {
+  right: 0;
+  left: initial;
+}
+/*left initial, um left q volta para sua maneira inicial*/
+
+#switch span {
+  display: block;
+  width: 64px;
+  height: 24px;
+  background-color: var(--surface-color);
+  border: 1px solid var(--stroke-color);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 9999px;
+}
+/*display inline n aceita largura fixa, background e border coloquei as variaveis pois vai mudar quando eu trocar para o light mode
+
+/* links*/
+
+ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px 0;
+  /* tira o estilo da lista (tira os pontinhos e os numeros, os topicos dessa lista, se usar display flex, ele mantem os elementos (li) um ao lado do outro, flex direction ja é row, porem se colocar flex direction column, ele fica um embaixo do outro noavamente, usando o gap x px ele da espaços entre as colunas */
+}
+
+ul li a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 24px;
+  background: var(--surface-color);
+  border: 1px solid var(--stroke-color);
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.2s;
+  /* li é display in block, o <a> é display inline, ocupa o tamanho do elemento, o li ocupa o tamanho do container, display flex no <a> faz com que ele ocupe todo o espaço disponivel, e n faz ssentido colocar gap no <a> porque dentro dele existe apenas 1 conteudo q é sao os textos, n tem como fzr espaço entre conteudos pq ele tem somente 1 conteudo, align-items centraliza a escrita na horizontal, justify-content a msm coisa porem na vertical, como se tivesse uma linha invisivel passando entre os textos no formato de uma cruz, acredito eu q pega o ultimo elemento ou seja o nome da linha é ul li a, mas so esta mudando os conteudos do a, border radius arredonda as bordas  RGBA: RED, GREEN, BLUE, ALPHA, alpha é a transparencia ou seja os 255 sao brancos absolutos mas o aplha é 0.5 oq deixa transparente c fosse 1 seria absoluto branco tudo, backdrop filter blur, da um embaçamento atras do elemento selecionado, text decoration para tirar linhas do texto, nome ja diz decoração de texto, font weight= força da fonte quanto maior mais negrito, transition, faz transições nesse caso esta mudando a transição de uma cor pra outra nos botoes*/
+}
+
+/*pseudo-selector, nele a gente aplica as coisas quando passar o mouse em cima*/
+ul li a:hover {
+  background: var(--surface-color-hover);
+  border: 1.5px solid var(--text-color);
+}
+
+/*social-links, display flex librea o justify content, q serve para alinhar conteudos, gap é o espaço entre esses conteudos, padding em volta e font size aumenta o tamanho desses elementos q no caso sao as logos dos sites*/
+#social-links {
+  display: flex;
+  justify-content: center;
+
+  padding: 16px 0;
+  font-size: 24px;
+}
+
+#social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  transition: background 0.2s;
+  border-radius: 50%;
+}
+
+#social-links a:hover {
+  background: var(--highlight-color);
+}
+
+footer {
+  padding: 24px 0px;
+  text-align: center;
+  font-size: 14px;
+}
