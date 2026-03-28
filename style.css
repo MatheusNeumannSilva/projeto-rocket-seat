@@ -180,7 +180,7 @@ footer {
   font-size: 14px;
 }
 
-/*media queries*/
+/*media queries quando a largura for minima de 700 px ele "muda a imagem" no caso era bg-mobile agr quando o minimo for 700px coloquei bg-desktop*/
 @media (min-width: 700px) {
   :root {
     --bgl-url: url(./assets/bg-desktop.jpg);
