@@ -99,14 +99,18 @@ body * {
   top: 50%;
   z-index: 1;
   transform: translateY(-50%);
+  animation: slide-back 0.2s;
 }
 /*position:absolute= posição absoluta, usando ele, ele imediatamente faz uma sobreposição, z-index: 1= muda o andar do elemento a camada, obs: position absolute libera o z-index, position relative, vai relativizar o absolute, o absoluto vai ser relativo ao elemento todo SWITCH, transform: translateY= permite mover o objeto para cima e para baixo, ja o X para os lados*/
 
 .light #switch button {
-  right: 0;
-  left: initial;
+  animation: slide-in 0.2s forwards;
 }
 /*left initial, um left q volta para sua maneira inicial*/
+
+#switch button:hover {
+  outline: 8px solid var(--highlight-color);
+}
 
 #switch span {
   display: block;
@@ -188,5 +192,24 @@ footer {
 
   .light {
     --bg-url: url(./assets/bg-desktop-light.jpg);
+  }
+}
+
+/* animation */
+@keyframes slide-in {
+  from {
+    left: 0;
+  }
+  to {
+    left: 50%;
+  }
+}
+
+@keyframes slide-back {
+  from {
+    left: 50%;
+  }
+  to {
+    left: 0;
   }
 }
